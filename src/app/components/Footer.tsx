@@ -7,7 +7,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <span className="text-[#c62828] text-xl">⛩</span>
               <span className="text-[#c62828] tracking-[0.3em] uppercase text-sm font-bold" style={{ fontFamily: "'Cinzel Decorative', serif" }}>
-                Harshtaal
+                Harshtal
               </span>
             </div>
             <p className="text-stone-500 text-sm leading-relaxed mb-4" style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}>
@@ -45,7 +45,7 @@ export function Footer() {
 
         <div className="border-t border-stone-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-stone-400 text-xs" style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}>
-            © 2026 Harshtaal Cultural Event. All rights reserved.
+            © 2026 Harshtal Cultural Event. All rights reserved.
           </p>
           <p className="text-stone-400 text-xs" style={{ fontFamily: "'Noto Serif JP', serif" }}>
             文化クラブの祭典

@@ -42,7 +42,7 @@ export function Navbar() {
               className="text-[#c62828] tracking-[0.3em] uppercase text-sm font-bold"
               style={{ fontFamily: "'Cinzel Decorative', serif" }}
             >
-              Harshtaal
+              Harshtal
             </span>
           </div>
         </a>

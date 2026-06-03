@@ -71,7 +71,7 @@ export function SponsorsPage() {
               Our Sponsors
             </h1>
             <p className="text-stone-600 leading-relaxed text-lg font-light" style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}>
-              Harshtaal is made possible by the generous support of our partners — visionary organisations who share our passion for celebrating culture and bringing communities together.
+              Harshtal is made possible by the generous support of our partners — visionary organisations who share our passion for celebrating culture and bringing communities together.
             </p>
           </motion.div>
         </div>

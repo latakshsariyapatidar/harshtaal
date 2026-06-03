@@ -63,7 +63,7 @@ export function HomePage() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Harshtaal
+              Harshtal
             </h1>
             <h2
               className="text-stone-400 mb-8 tracking-[0.4em] uppercase"
@@ -176,24 +176,24 @@ export function HomePage() {
                   fontWeight: 300,
                 }}
               >
-                About Harshtaal
+                About Harshtal
               </h2>
               <p
                 className="text-stone-600 leading-relaxed mb-6 font-light text-lg"
                 style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
               >
-                Harshtaal is the annual cultural festival of IIT Dharwad,
+                Harshtal is the annual cultural festival of IIT Dharwad,
                 bringing together students, artists, performers, and enthusiasts
                 from across the country for a celebration of creativity, talent,
                 and community.
 
-                Over the years, Harshtaal has grown into a vibrant platform that showcases a diverse range of events, including music, dance, drama, literature, fine arts, and cultural competitions. The festival provides an opportunity for participants to express themselves, learn from one another, and create lasting memories through shared experiences.
+                Over the years, Harshtal has grown into a vibrant platform that showcases a diverse range of events, including music, dance, drama, literature, fine arts, and cultural competitions. The festival provides an opportunity for participants to express themselves, learn from one another, and create lasting memories through shared experiences.
               </p>
               <p
                 className="text-stone-500 leading-relaxed mb-10 text-sm"
                 style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
               >
-                Hosted on the campus of IIT Dharwad, Harshtaal reflects the spirit of innovation, inclusivity, and artistic excellence. Whether through electrifying performances, engaging competitions, interactive workshops, or unforgettable cultural nights, the festival aims to inspire, connect, and celebrate the many forms of human expression.
+                Hosted on the campus of IIT Dharwad, Harshtal reflects the spirit of innovation, inclusivity, and artistic excellence. Whether through electrifying performances, engaging competitions, interactive workshops, or unforgettable cultural nights, the festival aims to inspire, connect, and celebrate the many forms of human expression.
               </p>
               <div className="grid grid-cols-3 gap-6">
                 {[
@@ -557,7 +557,7 @@ export function HomePage() {
                 className="text-xs uppercase tracking-[0.3em] text-stone-400 mb-3"
                 style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
               >
-                Outreach Harshtaal
+                Outreach Harshtal
               </p>
 
               <a
@@ -593,7 +593,7 @@ export function HomePage() {
               style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
             >
               For sponsorship enquiries, participation details, collaborations,
-              or general information regarding Harshtaal at IIT Dharwad, feel
+              or general information regarding Harshtal at IIT Dharwad, feel
               free to reach out directly via email or WhatsApp.
             </p>
           </motion.div>

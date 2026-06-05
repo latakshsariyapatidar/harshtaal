@@ -126,6 +126,25 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
         loaderState === "completed" ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
+      {/* Background Video */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-25"
+          style={{
+            filter: "blur(10px) brightness(0.45)",
+          }}
+        >
+          <source src="/LoaderVideo.mp4" type="video/mp4" />
+        </video>
+        {/* Soft overlay gradients */}
+        <div className="absolute inset-0 bg-[#0e100f]/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e100f] via-transparent to-[#0e100f]" />
+      </div>
+
       {/* Corners for Japanese minimalist screen aesthetic */}
       <div
         className={`absolute inset-8 border border-white/5 pointer-events-none transition-all duration-700 ${
@@ -256,7 +275,7 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
 
       {/* Interactive Label below the loader */}
       <div
-        className={`absolute bottom-[22%] flex flex-col items-center gap-3 transition-all duration-[600ms] pointer-events-none ${
+        className={`absolute bottom-[22%] flex flex-col items-center gap-3 transition-all duration-[600ms] pointer-events-none z-10 ${
           clicked ? "opacity-0 scale-95" : "opacity-100 animate-pulse"
         }`}
       >

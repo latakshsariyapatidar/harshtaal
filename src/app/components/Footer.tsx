@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
             <motion.a
-              href="#home"
+              href="/"
               className="flex items-center gap-3 mb-6 group w-fit"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -70,14 +70,20 @@ export function Footer() {
           <div>
             <p className="text-[#c62828] tracking-widest uppercase text-xs mb-4 font-medium" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>Navigate</p>
             <ul className="space-y-3">
-              {["Home", "About", "Sponsors", "Contact", "Tickets"].map((link) => (
-                <li key={link}>
+              {[
+                { label: "Home", href: "/" },
+                { label: "Events", href: "/events" },
+                { label: "Sponsors", href: "/sponsors" },
+                { label: "Teams", href: "/teams" },
+                { label: "Tickets", href: "/tickets" }
+              ].map((link) => (
+                <li key={link.label}>
                   <a
-                    href={`#${link.toLowerCase()}`}
+                    href={link.href}
                     className="text-stone-400 hover:text-[#c62828] text-sm transition-colors duration-300 font-light"
                     style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
                   >
-                    {link}
+                    {link.label}
                   </a>
                 </li>
               ))}

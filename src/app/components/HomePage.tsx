@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import ImageTrail from "../../components/ImageTrail";
 
 export function HomePage() {
   return (
@@ -8,6 +9,36 @@ export function HomePage() {
         id="home"
         className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0e100f]"
       >
+        <ImageTrail
+          items={[
+            "/Sakura%201.svg",
+            "/Sakura%202.svg",
+            "/Sakura%203.svg",
+            "/Sakura%204.svg",
+            "/Sakura%201.svg",
+            "/Sakura%202.svg",
+            "/Sakura%203.svg",
+            "/Sakura%204.svg",
+            "/Sakura%201.svg",
+            "/Sakura%202.svg",
+            "/Sakura%203.svg",
+            "/Sakura%204.svg",
+            "/Sakura%201.svg",
+            "/Sakura%202.svg",
+            "/Sakura%203.svg",
+            "/Sakura%204.svg",
+            "/Sakura%201.svg",
+            "/Sakura%202.svg",
+            "/Sakura%203.svg",
+            "/Sakura%204.svg",
+            "/Sakura%201.svg",
+            "/Sakura%202.svg",
+            "/Sakura%203.svg",
+            "/Sakura%204.svg",
+          ]}
+          variant={5}
+          size={15}
+        />
         {/* Background image */}
         <div
           className="absolute inset-0 opacity-15 mix-blend-lighten grayscale contrast-125"
@@ -111,9 +142,9 @@ export function HomePage() {
               { label: "Date & Time", value: "To be announced" },
               { label: "Venue", value: "IIT Dharwad Permanent Campus" },
             ].map((item) => (
-              <motion.div 
-                key={item.label} 
-                whileHover={{ 
+              <motion.div
+                key={item.label}
+                whileHover={{
                   boxShadow: "0 10px 25px rgba(0, 0, 0, 0.3)"
                 }}
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -442,7 +473,7 @@ export function HomePage() {
                 highlight: false,
               },
             ].map((tier, i) => (
-               <motion.div
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -451,14 +482,13 @@ export function HomePage() {
                 variants={{
                   hover: tier.highlight
                     ? { borderColor: "#ff3b3b", boxShadow: "0 25px 45px rgba(198,40,40,0.25)" }
-                    : {  borderColor: "rgba(255,255,255,0.15)", boxShadow: "0 20px 40px rgba(0,0,0,0.6)" }
+                    : { borderColor: "rgba(255,255,255,0.15)", boxShadow: "0 20px 40px rgba(0,0,0,0.6)" }
                 }}
                 key={tier.name}
-                className={`relative p-10 flex flex-col transition-all duration-300 cursor-pointer group ${
-                  tier.highlight
+                className={`relative p-10 flex flex-col transition-all duration-300 cursor-pointer group ${tier.highlight
                     ? "bg-[#1b1d1c] border border-[#c62828] shadow-2xl shadow-red-950/15 scale-105 z-10"
                     : "bg-[#161817] border border-white/5"
-                }`}
+                  }`}
               >
                 {tier.highlight && (
                   <div
@@ -508,7 +538,7 @@ export function HomePage() {
                         fontFamily: "'Noto Sans JP', sans-serif",
                       }}
                     >
-                      <motion.span 
+                      <motion.span
                         className="text-[#c62828] mt-0.5 text-[10px] shrink-0 block"
                         variants={{
                           hover: { rotate: 360, scale: 1.25, transition: { duration: 0.8, ease: "easeOut" } }
@@ -523,11 +553,10 @@ export function HomePage() {
                 <motion.button
                   whileHover={{ scale: 1.03, boxShadow: tier.highlight ? "0 5px 15px rgba(198, 40, 40, 0.3)" : "none" }}
                   whileTap={{ scale: 0.97 }}
-                  className={`w-full py-4 tracking-widest uppercase text-xs transition-colors duration-300 cursor-pointer ${
-                    tier.highlight
+                  className={`w-full py-4 tracking-widest uppercase text-xs transition-colors duration-300 cursor-pointer ${tier.highlight
                       ? "bg-[#c62828] text-white hover:bg-[#a01f1f]"
                       : "border border-white/10 text-stone-300 hover:bg-white/5 hover:text-white"
-                  }`}
+                    }`}
                   style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
                 >
                   Register
@@ -570,10 +599,10 @@ export function HomePage() {
             transition={{ delay: 0.2 }}
             className="flex flex-col gap-6"
           >
-            <motion.div 
-              whileHover={{ 
-                borderColor: "rgba(198, 40, 40, 0.5)", 
-                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.4)" 
+            <motion.div
+              whileHover={{
+                borderColor: "rgba(198, 40, 40, 0.5)",
+                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.4)"
               }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
               className="bg-[#161817] border border-white/5 p-8 shadow-md group cursor-pointer transition-colors duration-300"
@@ -594,10 +623,10 @@ export function HomePage() {
               </a>
             </motion.div>
 
-            <motion.div 
-              whileHover={{ 
-                borderColor: "rgba(198, 40, 40, 0.5)", 
-                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.4)" 
+            <motion.div
+              whileHover={{
+                borderColor: "rgba(198, 40, 40, 0.5)",
+                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.4)"
               }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
               className="bg-[#161817] border border-white/5 p-8 shadow-md group cursor-pointer transition-colors duration-300"

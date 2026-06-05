@@ -197,9 +197,9 @@ export function HomePage() {
               </p>
               <div className="grid grid-cols-3 gap-6">
                 {[
-                  { num: "5+", label: "Clubs" },
-                  { num: "15+", label: "Events" },
-                  { num: "200+", label: "Participants" },
+                  { num: "7+", label: "Clubs" },
+                  { num: "20+", label: "Events" },
+                  { num: "500+", label: "Participants" },
                 ].map((stat) => (
                   <motion.div
                     key={stat.label}

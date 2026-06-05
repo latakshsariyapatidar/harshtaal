@@ -4,9 +4,11 @@ import { HomePage } from "./components/HomePage";
 import { SponsorsPage } from "./components/SponsorsPage";
 import { SakuraPetals } from "./components/SakuraPetals";
 import { Footer } from "./components/Footer";
+import { Loader } from "./components/Loader";
 
 export default function App() {
   const [page, setPage] = useState<"home" | "sponsors">("home");
+  const [loaderState, setLoaderState] = useState<"loading" | "completed">("loading");
 
   const handleNavClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
@@ -34,15 +36,30 @@ export default function App() {
 
   return (
     <div
-      className="min-h-screen bg-stone-50 overflow-x-hidden text-stone-900"
-      style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
+      className={`min-h-screen bg-[#0e100f] overflow-x-hidden text-stone-200 ${
+        loaderState === "loading" ? "h-screen overflow-hidden" : ""
+      }`}
+      style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
       onClick={handleNavClick}
     >
       {/* MARKER-MAKE-KIT-INVOKED */}
-      <SakuraPetals />
-      <Navbar />
-      {page === "home" ? <HomePage /> : <SponsorsPage />}
-      <Footer />
+      
+      {/* Morphing Logo Loader */}
+      <Loader
+        loaderState={loaderState}
+        onStartMorph={() => {}}
+        onComplete={() => setLoaderState("completed")}
+      />
+
+      {/* Main Website Content */}
+      {loaderState === "completed" && (
+        <>
+          <SakuraPetals />
+          <Navbar />
+          {page === "home" ? <HomePage /> : <SponsorsPage />}
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

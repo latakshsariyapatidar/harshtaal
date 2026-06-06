@@ -35,7 +35,7 @@ export const clubsData: ClubModel[] = [
         venue: "TBD",
         description: "Event details are currently under planning and will be announced soon.",
         prize: "TBD",
-        image: "/music_club.png",
+        image: "/MusicCardBackground.png",
         rules: ["Rules and guidelines will be shared soon."]
       }
     ]

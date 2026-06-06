@@ -13,6 +13,8 @@ interface EventCardProps {
 }
 
 function EventCard({ event, onSelect }: EventCardProps) {
+  const hasBgImage = event.image && !event.image.endsWith("_club.png");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -21,40 +23,63 @@ function EventCard({ event, onSelect }: EventCardProps) {
       whileHover="hover"
       variants={{
         hover: {
-          y: -4,
-          borderColor: "rgba(198, 40, 40, 0.4)",
-          boxShadow: "0 15px 30px rgba(0,0,0,0.5)"
+          y: -6,
+          borderColor: hasBgImage ? "rgba(198, 40, 40, 0.6)" : "rgba(198, 40, 40, 0.4)",
+          boxShadow: hasBgImage 
+            ? "0 25px 40px rgba(198, 40, 40, 0.15), 0 15px 30px rgba(0,0,0,0.6)" 
+            : "0 15px 30px rgba(0,0,0,0.5)"
         }
       }}
       onClick={() => onSelect(event.id)}
-      className="bg-[#121413]/50 border border-white/5 p-6 rounded-2xl flex flex-col justify-between min-h-[260px] transition-all duration-300 cursor-pointer group"
+      className="relative overflow-hidden bg-[#121413]/55 border border-white/5 p-6 rounded-2xl flex flex-col justify-between min-h-[280px] transition-all duration-500 cursor-pointer group"
     >
-      <div>
-        <div className="flex justify-between items-start mb-4">
-          <span className="text-[10px] text-stone-500 font-medium uppercase tracking-wider font-sans">
-            {event.time.split(",")[0]}
-          </span>
-          <span className="text-[10px] text-[#c62828]/70 font-semibold uppercase tracking-wider font-sans">
-            {event.venue.split("(")[1]?.replace(")", "") || event.venue}
-          </span>
+      {/* Background Image Container */}
+      {hasBgImage && (
+        <>
+          <div 
+            className="absolute -inset-2 z-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105 blur-[4px]"
+            style={{ backgroundImage: `url('${event.image}')` }}
+          />
+          {/* Subtle multi-layer overlay for excellent typography contrast */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/95 via-[#0e100f]/80 to-black/30 pointer-events-none transition-opacity duration-500 group-hover:opacity-90" />
+          <div className="absolute inset-0 z-10 bg-[#0e100f]/20 mix-blend-overlay pointer-events-none" />
+        </>
+      )}
+
+      {/* Card Content (Relative z-20 to be on top of the overlays) */}
+      <div className="relative z-20 flex flex-col h-full justify-between flex-1">
+        <div>
+          <div className="flex justify-between items-start mb-4">
+            <span className="text-[10px] text-stone-400 font-medium uppercase tracking-wider font-sans group-hover:text-stone-200 transition-colors duration-300">
+              {event.time.split(",")[0]}
+            </span>
+            <span className="text-[10px] text-[#c62828] font-bold uppercase tracking-wider font-sans group-hover:text-red-400 transition-colors duration-300">
+              {event.venue.split("(")[1]?.replace(")", "") || event.venue}
+            </span>
+          </div>
+
+          <h4 className="text-white text-2xl font-black font-sans group-hover:text-[#c62828] transition-colors duration-300 tracking-wide uppercase leading-tight" style={{ fontFamily: "'Josefin Sans', sans-serif" }}>
+            {event.title}
+          </h4>
+          <p className="text-stone-300/90 text-xs mt-3 font-light line-clamp-3 leading-relaxed transition-colors duration-300 group-hover:text-stone-200" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
+            {event.tagline}
+          </p>
         </div>
 
-        <h4 className="text-white text-xl font-extrabold font-sans group-hover:text-[#c62828] transition-colors duration-300 tracking-wide uppercase" style={{ fontFamily: "'Josefin Sans', sans-serif" }}>
-          {event.title}
-        </h4>
-        <p className="text-stone-400 text-xs mt-2 font-light line-clamp-2 leading-relaxed" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
-          {event.tagline}
-        </p>
+        <div className="mt-8 pt-4 border-t border-white/10 flex justify-between items-center">
+          <span className="text-[9px] text-stone-400/80 font-medium uppercase tracking-widest" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
+            Prizes
+          </span>
+          <span className="text-[#c62828] text-base font-black font-sans group-hover:text-red-400 transition-colors duration-300">
+            {event.prize.replace("Prizes worth ", "")}
+          </span>
+        </div>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-        <span className="text-[9px] text-stone-500/80 font-medium uppercase tracking-widest" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
-          Prizes
-        </span>
-        <span className="text-[#c62828] text-sm font-extrabold font-sans">
-          {event.prize.replace("Prizes worth ", "")}
-        </span>
-      </div>
+      {/* Decorative neon corner accent for custom image cards */}
+      {hasBgImage && (
+        <div className="absolute bottom-0 right-0 w-24 h-1 bg-gradient-to-r from-transparent to-[#c62828] opacity-50 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      )}
     </motion.div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
+import { audioEngine } from '../lib/audioEngine';
 
 interface MenuItemData {
   link: string;
@@ -99,6 +100,12 @@ const MenuItem: React.FC<MenuItemProps> = ({
   }, [text, image, description]);
 
   useEffect(() => {
+    audioEngine.preload('/click.mp3').catch((err) => {
+      console.debug("Could not preload click sound:", err);
+    });
+  }, []);
+
+  useEffect(() => {
     const setupMarquee = () => {
       if (!marqueeInnerRef.current) return;
       const marqueeContent = marqueeInnerRef.current.querySelector('.marquee-part') as HTMLElement;
@@ -131,6 +138,9 @@ const MenuItem: React.FC<MenuItemProps> = ({
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
     const rect = itemRef.current.getBoundingClientRect();
     const edge = findClosestEdge(ev.clientX - rect.left, ev.clientY - rect.top, rect.width, rect.height);
+
+    // Play click sound on hover
+    audioEngine.play('/click.mp3', 0.2);
 
     gsap
       .timeline({ defaults: animationDefaults })

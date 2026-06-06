@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
 interface NotFoundPageProps {
@@ -5,6 +6,11 @@ interface NotFoundPageProps {
 }
 
 export function NotFoundPage({ onGoHome }: NotFoundPageProps) {
+  const [videoSrc, setVideoSrc] = useState("");
+
+  useEffect(() => {
+    setVideoSrc("/404.mp4");
+  }, []);
   return (
     <div className="relative w-screen h-screen overflow-hidden flex flex-col justify-end pb-24 md:pb-36 px-6 bg-[#0e100f]">
       {/* Background Video */}
@@ -13,10 +19,10 @@ export function NotFoundPage({ onGoHome }: NotFoundPageProps) {
         loop
         muted
         playsInline
+        preload="none"
+        src={videoSrc}
         className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
-      >
-        <source src="/404.mp4" type="video/mp4" />
-      </video>
+      />
 
       {/* Modern Gradient Blur Overlay */}
       <div

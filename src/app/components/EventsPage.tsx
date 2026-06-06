@@ -13,7 +13,7 @@ interface EventCardProps {
 }
 
 function EventCard({ event, onSelect }: EventCardProps) {
-  const hasBgImage = event.image && !event.image.endsWith("_club.png");
+  const hasBgImage = event.image && !event.image.includes("_club");
 
   return (
     <motion.div

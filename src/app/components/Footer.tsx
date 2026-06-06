@@ -14,7 +14,7 @@ export function Footer() {
             >
               {/* IIT Dharwad Logo */}
               <motion.img
-                src="/IITDh logo white.svg"
+                src="https://res.cloudinary.com/db69ffwwa/image/upload/v1780758822/IITDh_logo_white_shefkc.svg"
                 alt="IIT Dharwad Logo"
                 className="h-7 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300"
                 whileHover={{ scale: 1.05 }}

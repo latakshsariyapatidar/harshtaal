@@ -8,11 +8,16 @@ import Counter from "../../components/Counter";
 
 export function HomePage() {
   const [fontSize, setFontSize] = useState(48);
+  const [videoSrc, setVideoSrc] = useState("");
   const statsRef = useRef(null);
   const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
   // Refs for scroll animations
   const landerRef = useRef(null);
+
+  useEffect(() => {
+    setVideoSrc("https://res.cloudinary.com/db69ffwwa/video/upload/v1780758838/HomePage_qxpxus.mp4");
+  }, []);
 
   // 1. Lander scroll progress
   const { scrollYProgress: landerScroll } = useScroll({
@@ -50,30 +55,30 @@ export function HomePage() {
 
         <ImageTrail
           items={[
-            "/Sakura%201.svg",
-            "/Sakura%202.svg",
-            "/Sakura%203.svg",
-            "/Sakura%204.svg",
-            "/Sakura%201.svg",
-            "/Sakura%202.svg",
-            "/Sakura%203.svg",
-            "/Sakura%204.svg",
-            "/Sakura%201.svg",
-            "/Sakura%202.svg",
-            "/Sakura%203.svg",
-            "/Sakura%204.svg",
-            "/Sakura%201.svg",
-            "/Sakura%202.svg",
-            "/Sakura%203.svg",
-            "/Sakura%204.svg",
-            "/Sakura%201.svg",
-            "/Sakura%202.svg",
-            "/Sakura%203.svg",
-            "/Sakura%204.svg",
-            "/Sakura%201.svg",
-            "/Sakura%202.svg",
-            "/Sakura%203.svg",
-            "/Sakura%204.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+            "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
           ]}
           variant={5}
           size={15}
@@ -92,15 +97,15 @@ export function HomePage() {
               loop
               muted
               playsInline
+              preload="none"
+              src={videoSrc}
               className="w-full h-full object-cover scale-120"
               style={{
                 opacity: landerOpacity,
                 filter: landerFilter,
               }}
               {...{ "data-scroll": "", "data-scroll-speed": "0.05" }}
-            >
-              <source src="/HomePage.mp4" type="video/mp4" />
-            </motion.video>
+            />
 
             {/* Gradient from right to left going to blur on the left (transparent on right) */}
             <div
@@ -364,7 +369,7 @@ export function HomePage() {
               >
                 <div className="aspect-[4/5] overflow-hidden bg-[#161817] p-2 border border-white/5">
                   <img
-                    src="/background_about.png"
+                    src="https://res.cloudinary.com/db69ffwwa/image/upload/v1780759028/background_about_vx62m0.png"
                     alt="Minimal Japanese Architecture"
                     className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                   />
@@ -411,37 +416,37 @@ export function HomePage() {
                   {
                     text: "Music Club",
                     description: "Harmony in every note.",
-                    image: "/music_club.png",
+                    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758834/music_club_ic6ysc.jpg",
                     link: "/events#music"
                   },
                   {
                     text: "Dance Club",
                     description: "Move. Express. Perform.",
-                    image: "/dance_club.png",
+                    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758840/dance_club_akmvhn.jpg",
                     link: "/events#dance"
                   },
                   {
                     text: "Drama Club",
                     description: "Performance, expression, and storytelling.",
-                    image: "/drama_club.png",
+                    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758831/drama_club_o0jx1o.jpg",
                     link: "/events#drama"
                   },
                   {
                     text: "Photography Club",
                     description: "Moments captured through a unique lens.",
-                    image: "/photography_club.png",
+                    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758836/photography_club_gdmuid.jpg",
                     link: "/events#photography"
                   },
                   {
                     text: "Design Club",
                     description: "Ideas shaped into visual experiences.",
-                    image: "/design_club.png",
+                    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758847/design_club_nprwde.jpg",
                     link: "/events#design"
                   },
                   {
                     text: "Literary Club",
                     description: "Poetry, prose, and powerful expression.",
-                    image: "/literary_club.png",
+                    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758836/literary_club_xlpyna.jpg",
                     link: "/events#literary"
                   }
                 ]}
@@ -484,7 +489,7 @@ export function HomePage() {
             <div
               className="w-full h-full bg-cover bg-center opacity-50 pointer-events-none scale-120"
               style={{
-                backgroundImage: "url('/ContactPage.png')",
+                backgroundImage: "url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758917/ContactPage_jmrhei.png')",
               }}
               {...{ "data-scroll": "", "data-scroll-speed": "0.08" }}
             />

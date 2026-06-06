@@ -3,7 +3,7 @@
 @import './theme.css';
 
 * {
-  cursor: url('/Cursor.svg') 2 2, auto;
+  cursor: url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758821/Cursor_tsdolg.svg') 2 2, auto;
 }
 
 /* Allow text input and textareas to have the text cursor so editing is usable */

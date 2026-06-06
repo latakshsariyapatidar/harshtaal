@@ -68,7 +68,7 @@ export function AnimeTransition({ page, children }: AnimeTransitionProps) {
             transition={{ ...sweepTransition, delay: 0.03 }}
             className="absolute inset-y-0 w-[200%] md:w-[145%] bg-cover bg-center border-x-4 border-[#c62828] pointer-events-auto shadow-[0_0_50px_rgba(0,0,0,0.8)] will-change-transform"
             style={{
-              backgroundImage: "url('/PassBackground.png')",
+              backgroundImage: "url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758912/PassBackground_lrxyzv.png')",
               zIndex: 9992,
             }}
           >

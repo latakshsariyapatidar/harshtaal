@@ -254,7 +254,7 @@ export function TeamsPage() {
         <div
           className="absolute inset-0 bg-cover bg-center transition-all duration-75 ease-out scale-120"
           style={{
-            backgroundImage: "url('/TeamsBackground.png')",
+            backgroundImage: "url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758927/TeamsBackground_xxckvv.png')",
             filter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
             WebkitFilter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
             opacity: 0.35 - scrollProgress * 0.2,

@@ -48,7 +48,7 @@ export function Navbar() {
             scrolled ? "opacity-35 blur-[3px]" : "opacity-20 blur-[1px]"
           }`}
           style={{
-            backgroundImage: "url('/NavBarBackground.png')",
+            backgroundImage: "url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758899/NavBarBackground_mmnjka.png')",
           }}
         />
         {/* Dark Tint overlay with backdrop-blur */}

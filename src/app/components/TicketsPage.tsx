@@ -35,7 +35,7 @@ function TicketCard({ name, description, nameJp, price, features, highlight }: T
       <div
         className="absolute inset-0 bg-cover bg-center opacity-8 group-hover:opacity-15 group-hover:scale-105 transition-all duration-700 pointer-events-none z-0"
         style={{
-          backgroundImage: "url('/PassBackground.png')",
+          backgroundImage: "url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758912/PassBackground_lrxyzv.png')",
         }}
       />
       {/* Dark gradient overlay to preserve high readability */}
@@ -200,7 +200,7 @@ export function TicketsPage() {
         <div
           className="absolute inset-0 bg-cover bg-center transition-all duration-75 ease-out scale-120"
           style={{
-            backgroundImage: "url('/PassBackground.png')",
+            backgroundImage: "url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758912/PassBackground_lrxyzv.png')",
             filter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
             WebkitFilter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
             opacity: 0.4 - scrollProgress * 0.25,

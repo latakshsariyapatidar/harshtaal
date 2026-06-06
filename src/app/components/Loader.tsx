@@ -12,6 +12,7 @@ interface LoaderProps {
 export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
   const [clicked, setClicked] = useState(false);
   const [isHoveringCenter, setIsHoveringCenter] = useState(false);
+  const [videoSrc, setVideoSrc] = useState("");
   const sourceSvgRef = useRef<SVGSVGElement | null>(null);
   const targetSvgRef = useRef<SVGSVGElement | null>(null);
   const idleTweenRef = useRef<any>(null);
@@ -21,6 +22,7 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
     if (typeof gsap !== "undefined" && typeof MorphSVGPlugin !== "undefined") {
       gsap.registerPlugin(MorphSVGPlugin);
     }
+    setVideoSrc("https://res.cloudinary.com/db69ffwwa/video/upload/v1780759026/LoaderVideo_ldpf05.mp4");
   }, []);
 
   useEffect(() => {
@@ -133,13 +135,13 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
           loop
           muted
           playsInline
+          preload="none"
+          src={videoSrc}
           className="w-full h-full object-cover opacity-25"
           style={{
             filter: "blur(10px) brightness(0.45)",
           }}
-        >
-          <source src="/LoaderVideo.mp4" type="video/mp4" />
-        </video>
+        />
         {/* Soft overlay gradients */}
         <div className="absolute inset-0 bg-[#0e100f]/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0e100f] via-transparent to-[#0e100f]" />

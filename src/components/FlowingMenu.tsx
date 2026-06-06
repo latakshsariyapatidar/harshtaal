@@ -100,7 +100,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   }, [text, image, description]);
 
   useEffect(() => {
-    audioEngine.preload('/click.mp3').catch((err) => {
+    audioEngine.preload('https://res.cloudinary.com/db69ffwwa/video/upload/v1780758820/click_oht7gg.mp3').catch((err) => {
       console.debug("Could not preload click sound:", err);
     });
   }, []);
@@ -140,7 +140,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     const edge = findClosestEdge(ev.clientX - rect.left, ev.clientY - rect.top, rect.width, rect.height);
 
     // Play click sound on hover
-    audioEngine.play('/click.mp3', 0.2);
+    audioEngine.play('https://res.cloudinary.com/db69ffwwa/video/upload/v1780758820/click_oht7gg.mp3', 0.2);
 
     gsap
       .timeline({ defaults: animationDefaults })

@@ -52,9 +52,9 @@ export function EventDetailPage({ eventId, onBack, onNavigateToTickets }: EventD
         <div
           className="absolute inset-0 bg-cover bg-center transition-all duration-75 ease-out scale-120"
           style={{
-            backgroundImage: `url('${event.image && !event.image.endsWith("_club.png") ? event.image : "/ContactPage.png"}')`,
-            filter: `grayscale(${scrollProgress * 100}%) contrast(1.15) blur(${event.image && !event.image.endsWith("_club.png") ? "3px" : "0px"})`,
-            WebkitFilter: `grayscale(${scrollProgress * 100}%) contrast(1.15) blur(${event.image && !event.image.endsWith("_club.png") ? "3px" : "0px"})`,
+            backgroundImage: `url('${event.image && !event.image.includes("_club") ? event.image : "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758917/ContactPage_jmrhei.png"}')`,
+            filter: `grayscale(${scrollProgress * 100}%) contrast(1.15) blur(${event.image && !event.image.includes("_club") ? "3px" : "0px"})`,
+            WebkitFilter: `grayscale(${scrollProgress * 100}%) contrast(1.15) blur(${event.image && !event.image.includes("_club") ? "3px" : "0px"})`,
             opacity: 0.35 - scrollProgress * 0.25,
           }}
           {...{ "data-scroll": "", "data-scroll-speed": "0.08" }}

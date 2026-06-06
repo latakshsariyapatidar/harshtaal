@@ -25,7 +25,7 @@ export const clubsData: ClubModel[] = [
     name: "Music Club",
     nameJp: "音楽部",
     description: "Harmony in every note. Details to be decided.",
-    image: "/music_club.png",
+    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758834/music_club_ic6ysc.jpg",
     events: [
       {
         id: "music-tbd",
@@ -35,7 +35,7 @@ export const clubsData: ClubModel[] = [
         venue: "TBD",
         description: "Event details are currently under planning and will be announced soon.",
         prize: "TBD",
-        image: "/MusicCardBackground.png",
+        image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758914/MusicCardBackground_kqmke6.png",
         rules: ["Rules and guidelines will be shared soon."]
       }
     ]
@@ -45,7 +45,7 @@ export const clubsData: ClubModel[] = [
     name: "Dance Club",
     nameJp: "舞踊部",
     description: "Move. Express. Perform. Details to be decided.",
-    image: "/dance_club.png",
+    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758840/dance_club_akmvhn.jpg",
     events: [
       {
         id: "dance-tbd",
@@ -55,7 +55,7 @@ export const clubsData: ClubModel[] = [
         venue: "TBD",
         description: "Event details are currently under planning and will be announced soon.",
         prize: "TBD",
-        image: "/dance_club.png",
+        image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758840/dance_club_akmvhn.jpg",
         rules: ["Rules and guidelines will be shared soon."]
       }
     ]
@@ -65,7 +65,7 @@ export const clubsData: ClubModel[] = [
     name: "Drama Club",
     nameJp: "演劇部",
     description: "Performance, expression, and storytelling. Details to be decided.",
-    image: "/drama_club.png",
+    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758831/drama_club_o0jx1o.jpg",
     events: [
       {
         id: "drama-tbd",
@@ -75,7 +75,7 @@ export const clubsData: ClubModel[] = [
         venue: "TBD",
         description: "Event details are currently under planning and will be announced soon.",
         prize: "TBD",
-        image: "/drama_club.png",
+        image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758831/drama_club_o0jx1o.jpg",
         rules: ["Rules and guidelines will be shared soon."]
       }
     ]
@@ -85,7 +85,7 @@ export const clubsData: ClubModel[] = [
     name: "Photography Club",
     nameJp: "写真部",
     description: "Capturing moments and shifting perspectives. Details to be decided.",
-    image: "/photography_club.png",
+    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758836/photography_club_gdmuid.jpg",
     events: [
       {
         id: "photo-tbd",
@@ -95,7 +95,7 @@ export const clubsData: ClubModel[] = [
         venue: "TBD",
         description: "Event details are currently under planning and will be announced soon.",
         prize: "TBD",
-        image: "/photography_club.png",
+        image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758836/photography_club_gdmuid.jpg",
         rules: ["Rules and guidelines will be shared soon."]
       }
     ]
@@ -105,7 +105,7 @@ export const clubsData: ClubModel[] = [
     name: "Design Club",
     nameJp: "美術設計部",
     description: "Ideas shaped into visual assets. Details to be decided.",
-    image: "/design_club.png",
+    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758847/design_club_nprwde.jpg",
     events: [
       {
         id: "design-tbd",
@@ -115,7 +115,7 @@ export const clubsData: ClubModel[] = [
         venue: "TBD",
         description: "Event details are currently under planning and will be announced soon.",
         prize: "TBD",
-        image: "/design_club.png",
+        image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758847/design_club_nprwde.jpg",
         rules: ["Rules and guidelines will be shared soon."]
       }
     ]
@@ -125,7 +125,7 @@ export const clubsData: ClubModel[] = [
     name: "Literary Club",
     nameJp: "文芸部",
     description: "Poetry, prose, and intellectual expression. Details to be decided.",
-    image: "/literary_club.png",
+    image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758836/literary_club_xlpyna.jpg",
     events: [
       {
         id: "literary-tbd",
@@ -135,7 +135,7 @@ export const clubsData: ClubModel[] = [
         venue: "TBD",
         description: "Event details are currently under planning and will be announced soon.",
         prize: "TBD",
-        image: "/literary_club.png",
+        image: "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758836/literary_club_xlpyna.jpg",
         rules: ["Rules and guidelines will be shared soon."]
       }
     ]

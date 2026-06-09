@@ -11,9 +11,10 @@ import { Footer } from "./components/Footer";
 import { Loader } from "./components/Loader";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { AnimeTransition } from "./components/AnimeTransition";
+import { GalleryPage } from "./components/GalleryPage";
 
 export default function App() {
-  const [page, setPage] = useState<"home" | "sponsors" | "tickets" | "teams" | "events" | "event-detail" | "404">("home");
+  const [page, setPage] = useState<"home" | "sponsors" | "tickets" | "teams" | "events" | "event-detail" | "gallery" | "404">("home");
   const [selectedClub, setSelectedClub] = useState<string | null>(null);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const [loaderState, setLoaderState] = useState<"loading" | "completed">(() => {
@@ -40,6 +41,8 @@ export default function App() {
           setPage("teams");
         } else if (hash === "#events") {
           setPage("events");
+        } else if (hash === "#gallery") {
+          setPage("gallery");
         } else {
           setPage("home");
         }
@@ -49,6 +52,8 @@ export default function App() {
         setPage("tickets");
       } else if (path === "/teams") {
         setPage("teams");
+      } else if (path === "/gallery") {
+        setPage("gallery");
       } else if (path === "/events") {
         setPage("events");
         if (hash) {
@@ -152,6 +157,11 @@ export default function App() {
         setSelectedClub(null);
         setSelectedEventId(null);
         window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (basePath === "/gallery") {
+        setPage("gallery");
+        setSelectedClub(null);
+        setSelectedEventId(null);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else if (basePath === "/events") {
         setPage("events");
         setSelectedEventId(null);
@@ -214,6 +224,7 @@ export default function App() {
                 {page === "sponsors" && <SponsorsPage />}
                 {page === "tickets" && <TicketsPage />}
                 {page === "teams" && <TeamsPage />}
+                {page === "gallery" && <GalleryPage />}
                 {page === "events" && (
                   <EventsPage
                     selectedClub={selectedClub}

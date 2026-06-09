@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Events", href: "/events" },
   { label: "Sponsors", href: "/sponsors" },
   { label: "Teams", href: "/teams" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Tickets", href: "/tickets", highlight: true },
 ];
 
@@ -222,6 +223,7 @@ export function Navbar() {
                       {link.label === "Events" && "イベント | Events"}
                       {link.label === "Sponsors" && "協賛企業 | Partners"}
                       {link.label === "Teams" && "チーム | Organizing Team"}
+                      {link.label === "Gallery" && "ギャラリー | Gallery"}
                       {link.label === "Tickets" && "登録 | Register Pass"}
                     </span>
                   </a>

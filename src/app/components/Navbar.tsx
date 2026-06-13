@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import Lottie from "lottie-react";
+import LottieComponent from "lottie-react";
 import NavbarLeftAnimation from "../../LottieAnimation/NavbarLeftAnimation.json";
+
+// Fix default export issue in CJS/ESM hybrid environments
+const Lottie = (LottieComponent as any).default || LottieComponent;
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -94,7 +97,7 @@ export function Navbar() {
               <path d="M323.6 277.3H303.74V250.18H323.6V277.3ZM275.82 277.32H255.96V250.2H275.82V277.32ZM228.04 277.33H208.18V250.22H228.04V277.33ZM180.26 277.35H160.4V250.23H180.26V277.35ZM151.74 241.51V286.02H332.26V241.51H151.74Z" fill="currentColor" />
               <path d="M300.44 162.49H281.61V136.77H300.44V162.49ZM268.15 162.49H249.32V136.77H268.15V162.49ZM235.86 162.49H217.03V136.77H235.86V162.49ZM203.57 162.49H184.74V136.77H203.57V162.49ZM176.24 129.64V169.62H308.94V129.64H176.24Z" fill="currentColor" />
               <path d="M251.11 45.6201H246.27C246.84 44.4801 247.18 43.1 247.18 41.6102C247.18 38.7 245.89 36.2 244.04 35.1101V2.79003C244.04 1.24999 243.13 -7.62939e-06 242 -7.62939e-06C240.87 -7.62939e-06 239.96 1.24999 239.96 2.79003V35.1101C238.11 36.2 236.82 38.7 236.82 41.6102C236.82 43.1 237.16 44.4801 237.74 45.6201H232.89C231.16 45.6201 229.75 47.54 229.75 49.9102C229.75 52.2801 231.16 54.19 232.89 54.19H251.11C252.84 54.19 254.25 52.2801 254.25 49.9102C254.25 47.54 252.84 45.6201 251.11 45.6201Z" fill="currentColor" />
-              <path d="M484.01 510.85C479.57 483.66 372.92 461.91 242 461.91C111.08 461.91 4.42988 483.66 0 510.85C67.05 502.94 148.96 496.7C242.4 496.7 335.5 496.71 484.01 510.85Z" fill="currentColor" />
+              <path d="M484.01 510.85C479.57 483.66 372.92 461.91 242 461.91C111.08 461.91 4.42988 483.66 0 510.85C67.05 502.94 148.96 496.68 242.4 496.7C335.5 496.71 417.13 502.96 484.01 510.85Z" fill="currentColor" />
             </motion.svg>
             {/* Harshtal SVG Text Logo */}
             <motion.svg

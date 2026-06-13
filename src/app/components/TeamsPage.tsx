@@ -10,6 +10,8 @@ interface TeamMemberProps {
   avatarUrl?: string;
   linkedin?: string;
   twitter?: string;
+  isSmall?: boolean;
+  email?: string;
 }
 
 const getInitialsSvgUrl = (name: string, bg = "#c62828") => {
@@ -24,12 +26,15 @@ const getBigInitialsSvgUrl = (name: string, bg = "#c62828") => {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
-function CoreMemberCard({ name, role, roleJp, club, avatarUrl }: TeamMemberProps) {
-  const emailName = name.toLowerCase().replace(/\s+/g, ".");
+function CoreMemberCard({ name, role, roleJp, club, avatarUrl, isSmall, email }: TeamMemberProps) {
   const placeholderImage = getBigInitialsSvgUrl(name);
 
   return (
-    <div className="relative flex h-[27rem] w-full max-w-[340px] flex-col justify-end md:h-[32rem] overflow-hidden rounded-2xl group border border-white/5 transition-all duration-500 hover:border-[#c62828]/50 hover:shadow-[0_15px_30px_rgba(0,0,0,0.5)]">
+    <div className={`relative flex w-full flex-col justify-end overflow-hidden rounded-2xl group border border-white/5 transition-all duration-500 hover:border-[#c62828]/50 hover:shadow-[0_15px_30px_rgba(0,0,0,0.5)] ${
+      isSmall
+        ? "h-[22rem] md:h-[25rem] max-w-[260px]"
+        : "h-[27rem] md:h-[32rem] max-w-[340px]"
+    }`}>
       {/* Background Image */}
       <img
         alt={name}
@@ -40,10 +45,12 @@ function CoreMemberCard({ name, role, roleJp, club, avatarUrl }: TeamMemberProps
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
       {/* Info Content Overlay */}
-      <div className="z-20 p-4 pt-16 md:p-5 md:pt-20 lg:pt-24 transition-all duration-300">
-        <div className="rounded-xl bg-[#121413]/75 px-4 pt-5 pb-6 text-white ring-1 ring-white/10 backdrop-blur-[10px] ring-inset transition-all duration-300 group-hover:ring-[#c62828]/30 group-hover:bg-[#121413]/90">
+      <div className={`z-20 transition-all duration-300 ${isSmall ? "p-3 pt-12" : "p-4 pt-16 md:p-5 md:pt-20 lg:pt-24"}`}>
+        <div className={`rounded-xl bg-[#121413]/75 text-white ring-1 ring-white/10 backdrop-blur-[10px] ring-inset transition-all duration-300 group-hover:ring-[#c62828]/30 group-hover:bg-[#121413]/90 ${
+          isSmall ? "px-3 pt-3.5 pb-4" : "px-4 pt-5 pb-6"
+        }`}>
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold tracking-wide font-sans" style={{ fontFamily: "'Josefin Sans', sans-serif" }}>
+            <h3 className={`font-bold tracking-wide font-sans ${isSmall ? "text-base" : "text-xl"}`} style={{ fontFamily: "'Josefin Sans', sans-serif" }}>
               {name}
             </h3>
             <svg
@@ -67,38 +74,24 @@ function CoreMemberCard({ name, role, roleJp, club, avatarUrl }: TeamMemberProps
           <p className="mt-1 text-xs text-stone-300 font-light leading-relaxed" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
             {role}
           </p>
-          <ul className="mt-4 flex gap-5">
-            <li>
+          {email && (
+            <div className="mt-4 flex">
               <a
-                href={`mailto:${emailName}@iitdh.ac.in`}
-                className="flex rounded-sm text-stone-400 hover:text-white transition-colors duration-300 outline-none"
+                href={`mailto:${email}`}
+                className="text-xs text-stone-400 hover:text-white hover:underline transition-colors duration-300 outline-none break-all"
                 aria-label={`Contact ${name}`}
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="size-5"
-                >
-                  <rect width="20" height="16" x="2" y="4" rx="2" />
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                </svg>
+                {email}
               </a>
-            </li>
-          </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-function TeamMemberCard({ name, role, club, avatarUrl, linkedin, twitter }: TeamMemberProps) {
-  const emailName = name.toLowerCase().replace(/\s+/g, ".");
+function TeamMemberCard({ name, role, club, avatarUrl, linkedin, twitter, email }: TeamMemberProps) {
   const placeholderImage = getInitialsSvgUrl(name);
 
   return (
@@ -129,27 +122,16 @@ function TeamMemberCard({ name, role, club, avatarUrl, linkedin, twitter }: Team
         </p>
 
         {/* Contacts */}
-        <div className="flex items-center gap-3.5 mt-2">
-          <a
-            href={`mailto:${emailName}@iitdh.ac.in`}
-            className="text-stone-500 hover:text-white transition-colors duration-300"
-            aria-label={`Email ${name}`}
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-3.5"
+        <div className="flex items-center gap-3.5 mt-2 flex-wrap">
+          {email && (
+            <a
+              href={`mailto:${email}`}
+              className="text-stone-400 hover:text-white hover:underline transition-colors duration-300 text-[11px] break-all"
+              aria-label={`Email ${name}`}
             >
-              <rect width="20" height="16" x="2" y="4" rx="2" />
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-            </svg>
-          </a>
+              {email}
+            </a>
+          )}
           <a
             href={linkedin || "https://linkedin.com"}
             target="_blank"
@@ -217,34 +199,13 @@ export function TeamsPage() {
       title: "Core Committee",
       titleJp: "実行委員会",
       members: [
-        { name: "Mayank Mishra", role: "Overall Coordinator", roleJp: " ", avatarInitials: "MM" },
-        // { name: "Ayush Raj", role: "TBD", roleJp: " ", avatarInitials: "AR" },
-        // { name: "Harshit Konda", role: "TBD", roleJp: " ", avatarInitials: "HK" },
-        // { name: "Shreyas Bhawalkar", role: "TBD", roleJp: " ", avatarInitials: "SB" },
-        // { name: "Tushar Hegde", role: "TBD", roleJp: " ", avatarInitials: "TH" },
+        { name: "Mayank Mishra", role: "Overall Coordinator", roleJp: "", avatarInitials: "MM", avatarUrl: "/Mayank.jpeg", email: "is24bm003@iitdh.ac.in" },
+        { name: "Ayush Raj", role: "Events Head", roleJp: " ", avatarInitials: "AR", avatarUrl: "/Ayush.jpeg", email: "is24bm002@iitdh.ac.in" },
+        { name: "Harshit Konda", role: "Operations & Logistics Head", roleJp: " ", avatarInitials: "HK", avatarUrl: "/Harshit.jpeg", email: "" },
+        { name: "Shreyas Bhawalkar", role: "Outreach Head", roleJp: " ", avatarInitials: "SB", avatarUrl: "/Shreyas.jpeg", email: "" },
+        { name: "Tushar Hegde", role: "Finance Head", roleJp: " ", avatarInitials: "TH", avatarUrl: "/Tushar.jpeg", email: "" },
       ]
-    },
-    // {
-    //   title: "Design & Technical Committee",
-    //   titleJp: "デザイン＆技術チーム",
-    //   members: [
-    //     { name: "TBD", role: "TBD", roleJp: " ", avatarInitials: "TBD" },
-    //     { name: "TBD", role: "TBD", roleJp: " ", avatarInitials: "TBD" },
-    //     { name: "TBD", role: "TBD", roleJp: " ", avatarInitials: "TBD" },
-    //   ]
-    // },
-    // {
-    //   title: "Cultural Club Coordinators",
-    //   titleJp: "文化クラブコーディネーター",
-    //   members: [
-    //     { name: "TBD", role: "TBD", roleJp: " ", club: "Music", avatarInitials: "TBD" },
-    //     { name: "TBD", role: "TBD", roleJp: " ", club: "Dance", avatarInitials: "TBD" },
-    //     { name: "TBD", role: "TBD", roleJp: " ", club: "Drama", avatarInitials: "TBD" },
-    //     { name: "TBD", role: "TBD", roleJp: " ", club: "Photography", avatarInitials: "TBD" },
-    //     { name: "TBD", role: "TBD", roleJp: " ", club: "Design", avatarInitials: "TBD" },
-    //     { name: "TBD", role: "TBD", roleJp: " ", club: "Literary", avatarInitials: "TBD" },
-    //   ]
-    // }
+    }
   ];
 
   return (
@@ -262,7 +223,7 @@ export function TeamsPage() {
           {...{ "data-scroll": "", "data-scroll-speed": "0.08" }}
         />
         {/* Progressive blur transition */}
-        <div 
+        <div
           className="absolute inset-x-0 bottom-0 h-72 pointer-events-none z-10"
           style={{
             backdropFilter: "blur(12px)",
@@ -317,12 +278,22 @@ export function TeamsPage() {
                 </h3>
               </motion.div>
 
-              {/* Members Container */}
               {section.title === "Core Committee" ? (
-                <div className="flex flex-wrap justify-center gap-8 w-full">
-                  {section.members.map((member) => (
-                    <CoreMemberCard key={member.name} {...member} />
-                  ))}
+                <div className="flex flex-col items-center gap-8 w-full">
+                  {/* Overall Coordinator on his own line */}
+                  {section.members.length > 0 && (
+                    <div className="flex justify-center w-full">
+                      <CoreMemberCard {...section.members[0]} />
+                    </div>
+                  )}
+                  {/* Remaining members in a grid of 4 */}
+                  {section.members.length > 1 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full justify-items-center">
+                      {section.members.slice(1).map((member) => (
+                        <CoreMemberCard key={member.name} {...member} isSmall={true} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center w-full">

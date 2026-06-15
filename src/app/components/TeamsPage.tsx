@@ -197,8 +197,8 @@ export function TeamsPage() {
       title: "Core Committee",
       titleJp: "実行委員会",
       members: [
-        { name: "Mayank Mishra", role: "Overall Coordinator", roleJp: "", avatarInitials: "MM", avatarUrl: "/Mayank.jpeg", email: "is24bm003@iitdh.ac.in" },
-        { name: "Ayush Raj", role: "Events Head", roleJp: " ", avatarInitials: "AR", avatarUrl: "/Ayush.jpeg", email: "is24bm002@iitdh.ac.in" },
+        { name: "Mayank Mishra", role: "Overall Coordinator", roleJp: "", avatarInitials: "MM", avatarUrl: "/Mayank.jpeg", email: "is24bm002@iitdh.ac.in" },
+        { name: "Ayush Raj", role: "Events Head", roleJp: " ", avatarInitials: "AR", avatarUrl: "/Ayush.jpeg", email: "is24bm003@iitdh.ac.in" },
         { name: "Harshit Konda", role: "Operations & Logistics Head", roleJp: " ", avatarInitials: "HK", avatarUrl: "/Harshit.jpeg", email: "mc24bt025@iitdh.ac.in" },
         { name: "Shreyas Bhawalkar", role: "Outreach Head", roleJp: " ", avatarInitials: "SB", avatarUrl: "/Shreyas.jpeg", email: "me24bt027@iitdh.ac.in" },
         { name: "Tushar Hegde", role: "Finance Head", roleJp: " ", avatarInitials: "TH", avatarUrl: "/Tushar.jpeg", email: "ep24bt002@iitdh.ac.in" },

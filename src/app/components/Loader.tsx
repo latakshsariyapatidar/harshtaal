@@ -13,6 +13,7 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
   const [clicked, setClicked] = useState(false);
   const [isHoveringCenter, setIsHoveringCenter] = useState(false);
   const [videoSrc, setVideoSrc] = useState("");
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
   const sourceSvgRef = useRef<SVGSVGElement | null>(null);
   const targetSvgRef = useRef<SVGSVGElement | null>(null);
   const idleTweenRef = useRef<any>(null);
@@ -23,6 +24,17 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
       gsap.registerPlugin(MorphSVGPlugin);
     }
     setVideoSrc("https://res.cloudinary.com/db69ffwwa/video/upload/v1780759026/LoaderVideo_ldpf05.mp4");
+
+    // Preload critical assets
+    const img = new Image();
+    img.src = "https://res.cloudinary.com/db69ffwwa/image/upload/v1781354384/frame1_clobib.png";
+    img.onload = () => {
+      setAssetsLoaded(true);
+    };
+    img.onerror = () => {
+      // Fallback in case of error so user is not stuck
+      setAssetsLoaded(true);
+    };
   }, []);
 
   useEffect(() => {
@@ -52,7 +64,7 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
   }, []);
 
   const handleStart = () => {
-    if (clicked) return;
+    if (clicked || !assetsLoaded) return;
     setClicked(true);
     onStartMorph(); // Set state to "transitioning" to signal transition has begun
 
@@ -281,22 +293,33 @@ export function Loader({ onComplete, loaderState, onStartMorph }: LoaderProps) {
           clicked ? "opacity-0 scale-95" : "opacity-100 animate-pulse"
         }`}
       >
-        <p
-          className={`tracking-[0.5em] text-[10px] md:text-xs uppercase font-medium transition-all duration-500 ${
-            isHoveringCenter ? "text-white scale-105 tracking-[0.6em]" : "text-stone-400"
-          }`}
-          style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
-        >
-          Click to Begin
-        </p>
-        <span
-          className={`text-[#c62828] text-xs font-light tracking-widest transition-transform duration-500 ${
-            isHoveringCenter ? "scale-110 text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" : ""
-          }`}
-          style={{ fontFamily: "'Noto Serif JP', serif" }}
-        >
-          ✦ 静寂の中の鼓動 ✦
-        </span>
+        {!assetsLoaded ? (
+          <p
+            className="tracking-[0.5em] text-[10px] md:text-xs uppercase font-medium text-stone-400"
+            style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
+          >
+            Loading Assets...
+          </p>
+        ) : (
+          <>
+            <p
+              className={`tracking-[0.5em] text-[10px] md:text-xs uppercase font-medium transition-all duration-500 ${
+                isHoveringCenter ? "text-white scale-105 tracking-[0.6em]" : "text-stone-400"
+              }`}
+              style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif" }}
+            >
+              Click to Begin
+            </p>
+            <span
+              className={`text-[#c62828] text-xs font-light tracking-widest transition-transform duration-500 ${
+                isHoveringCenter ? "scale-110 text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" : ""
+              }`}
+              style={{ fontFamily: "'Noto Serif JP', serif" }}
+            >
+              ✦ 静寂の中の鼓動 ✦
+            </span>
+          </>
+        )}
       </div>
     </div>
   );

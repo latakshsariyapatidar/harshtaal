@@ -8,16 +8,11 @@ import Counter from "../../components/Counter";
 
 export function HomePage() {
   const [fontSize, setFontSize] = useState(48);
-  const [videoSrc, setVideoSrc] = useState("");
   const statsRef = useRef(null);
   const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
   // Refs for scroll animations
   const landerRef = useRef(null);
-
-  useEffect(() => {
-    setVideoSrc("https://res.cloudinary.com/db69ffwwa/video/upload/v1780758838/HomePage_qxpxus.mp4");
-  }, []);
 
   // 1. Lander scroll progress
   const { scrollYProgress: landerScroll } = useScroll({
@@ -90,19 +85,15 @@ export function HomePage() {
           className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0e100f]"
         >
 
-          {/* Background video */}
+          {/* Background Image */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <motion.video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="none"
-              src={videoSrc}
-              className="w-full h-full object-cover scale-120"
+            <motion.img
+              src="https://res.cloudinary.com/db69ffwwa/image/upload/v1781354384/frame1_clobib.png"
+              alt="Harshtal Background"
+              className="w-full h-full object-cover opacity-60"
               style={{
-                opacity: landerOpacity,
                 filter: landerFilter,
+                opacity: landerOpacity,
               }}
               {...{ "data-scroll": "", "data-scroll-speed": "0.05" }}
             />

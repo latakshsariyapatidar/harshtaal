@@ -1,0 +1,140 @@
+/* Vertical Marquee Scrolling Keyframes */
+@keyframes marqueeUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marqueeDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Linear-gradient masking for fading edges at the top and bottom of the grid */
+.marquee-mask {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+/* Container to hide column overflows */
+.marquee-column-wrapper {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Vertical track containing original and duplicated item blocks */
+.marquee-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Gap between grid items */
+  width: 100%;
+  will-change: transform;
+}
+
+.marquee-track.scroll-up {
+  animation: marqueeUp 45s linear infinite;
+}
+
+.marquee-track.scroll-down {
+  animation: marqueeDown 45s linear infinite;
+}
+
+/* Offset speeds for multi-column parallax/organic scroll feel */
+.speed-slow {
+  animation-duration: 55s !important;
+}
+
+.speed-fast {
+  animation-duration: 35s !important;
+}
+
+/* Pause the animation for a specific column when user hovers */
+.marquee-column-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Premium Card container with scale transform and shadow adjustments */
+.marquee-item {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.marquee-item:hover {
+  transform: scale(0.975);
+  box-shadow: 0px 15px 50px -10px rgba(0, 0, 0, 0.8);
+}
+
+.marquee-item-image {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Subtle image scale expansion inside cards on hover */
+.marquee-item:hover .marquee-item-image {
+  transform: scale(1.04);
+}
+
+/* Custom Red/Pink brand color shift on hover overlay */
+.color-overlay {
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.marquee-item:hover .color-overlay {
+  opacity: 0.3;
+}
+
+/* Hover info overlay animation (smooth fade and slide up) */
+.marquee-info-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1.25rem 1.25rem;
+  background: linear-gradient(to top, rgba(14, 16, 15, 0.95) 0%, rgba(14, 16, 15, 0.4) 70%, transparent 100%);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.marquee-item:hover .marquee-info-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}

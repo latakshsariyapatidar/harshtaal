@@ -139,31 +139,17 @@ const galleryItems = [
 ];
 
 export function GalleryPage() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollProgress = Math.min(scrollY / 300, 1);
-
   return (
-    <div className="relative min-h-screen bg-[#0e100f] text-stone-200 overflow-x-hidden">
-      {/* Parallax Background Image Container */}
+    <div className="relative min-h-screen bg-[#0e100f] text-stone-200 overflow-x-hidden pt-12">
+      {/* Background Image Container */}
       <div className="absolute top-0 left-0 right-0 h-[600px] overflow-hidden pointer-events-none z-0">
         <div
-          className="absolute inset-0 bg-cover bg-center transition-all duration-75 ease-out scale-120"
+          className="absolute inset-0 bg-cover bg-center scale-120 opacity-30"
           style={{
             backgroundImage: "url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758912/PassBackground_lrxyzv.png')",
-            filter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
-            WebkitFilter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
-            opacity: 0.45 - scrollProgress * 0.3,
+            filter: "contrast(1.15)",
+            WebkitFilter: "contrast(1.15)"
           }}
-          {...{ "data-scroll": "", "data-scroll-speed": "0.08" }}
         />
         {/* Progressive blur mask transition */}
         <div
@@ -182,54 +168,42 @@ export function GalleryPage() {
       </div>
 
       {/* Hero Header */}
-      <div className="relative pt-36 pb-24 px-6 z-10 text-center max-w-3xl mx-auto">
+      <div className="relative pt-24 pb-4 px-6 z-10 text-center max-w-3xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           <p 
-            className="text-stone-500/80 tracking-[0.4em] uppercase text-[10px] mb-3 font-semibold" 
+            className="text-stone-500/80 tracking-[0.4em] uppercase text-[10px] mb-2 font-semibold" 
             style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
           >
             ギャラリー | gallery
           </p>
           <h1
-            className="text-white mb-6 leading-tight font-extrabold font-sans uppercase tracking-wide"
-            style={{ fontFamily: "'Josefin Sans', sans-serif", fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
+            className="text-white mb-2 leading-tight font-extrabold font-sans uppercase tracking-wide"
+            style={{ fontFamily: "'Josefin Sans', sans-serif", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             Festival Moments
           </h1>
           <p 
-            className="text-stone-400 leading-relaxed text-md font-light max-w-xl mx-auto" 
+            className="text-stone-400 leading-relaxed text-sm font-light max-w-xl mx-auto" 
             style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
           >
-            Immerse yourself in a visual journey of modern design and rich cultural heritage. Explore the moments that define the spirit of Harshtal.
+            Explore the moments that define the spirit of Harshtal. Hover over columns to pause scrolling, and click images to view them in full.
           </p>
         </motion.div>
       </div>
 
-      {/* Main Content Area */}
+      {/* Main Content Area: Responsive Marquee */}
       <div className="relative z-10 bg-[#0e100f] py-16 px-6 border-t border-white/5 shadow-[0_-30px_50px_rgba(14,16,15,0.95)]">
-        <div className="max-w-6xl mx-auto">
-          {/* GSAP-animated Masonry component */}
+        <div className="max-w-6xl mx-auto h-[600px] md:h-[800px] lg:h-[850px] overflow-hidden">
           <Masonry
             items={galleryItems}
-            ease="power3.out"
-            duration={0.6}
-            stagger={0.05}
-            animateFrom="bottom"
             scaleOnHover={true}
             hoverScale={0.97}
-            blurToFocus={true}
             colorShiftOnHover={true}
           />
-          <div 
-            className="text-center mt-20 text-stone-500/60 tracking-[0.2em] text-xs font-light"
-            style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
-          >
-            ...and many more such memories
-          </div>
         </div>
       </div>
     </div>

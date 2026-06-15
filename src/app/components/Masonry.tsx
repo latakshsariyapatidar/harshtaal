@@ -1,48 +1,17 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { gsap } from 'gsap';
+import React, { useMemo } from 'react';
 
+// Responsive hook to track current window matching media query values
 const useMedia = (queries: string[], values: number[], defaultValue: number): number => {
   const get = () => values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue;
+  const [value, setValue] = React.useState<number>(get);
 
-  const [value, setValue] = useState<number>(get);
-
-  useEffect(() => {
+  React.useEffect(() => {
     const handler = () => setValue(get);
     queries.forEach(q => matchMedia(q).addEventListener('change', handler));
     return () => queries.forEach(q => matchMedia(q).removeEventListener('change', handler));
   }, [queries]);
 
   return value;
-};
-
-const useMeasure = <T extends HTMLElement>() => {
-  const ref = useRef<T | null>(null);
-  const [size, setSize] = useState({ width: 0, height: 0 });
-
-  useLayoutEffect(() => {
-    if (!ref.current) return;
-    const ro = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect;
-      setSize({ width, height });
-    });
-    ro.observe(ref.current);
-    return () => ro.disconnect();
-  }, []);
-
-  return [ref, size] as const;
-};
-
-const preloadImages = async (urls: string[]): Promise<void> => {
-  await Promise.all(
-    urls.map(
-      src =>
-        new Promise<void>(resolve => {
-          const img = new Image();
-          img.src = src;
-          img.onload = img.onerror = () => resolve();
-        })
-    )
-  );
 };
 
 interface Item {
@@ -52,13 +21,6 @@ interface Item {
   height: number;
   title?: string;
   subtitle?: string;
-}
-
-interface GridItem extends Item {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
 }
 
 interface MasonryProps {
@@ -75,221 +37,82 @@ interface MasonryProps {
 
 const Masonry: React.FC<MasonryProps> = ({
   items,
-  ease = 'power3.out',
-  duration = 0.6,
-  stagger = 0.05,
-  animateFrom = 'bottom',
-  scaleOnHover = true,
-  hoverScale = 0.95,
-  blurToFocus = true,
-  colorShiftOnHover = false
+  colorShiftOnHover = true
 }) => {
-  const columns = useMedia(
-    ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
-    [5, 4, 3, 2],
+  // Use responsive media queries to determine column counts:
+  // Desktop: 3 columns, Tablet: 2 columns, Mobile: 1 column
+  const columnsCount = useMedia(
+    ['(min-width: 1024px)', '(min-width: 640px)'],
+    [3, 2],
     1
   );
 
-  const [containerRef, { width }] = useMeasure<HTMLDivElement>();
-  const [imagesReady, setImagesReady] = useState(false);
-
-  const getInitialPosition = (item: GridItem) => {
-    const containerRect = containerRef.current?.getBoundingClientRect();
-    if (!containerRect) return { x: item.x, y: item.y };
-
-    let direction = animateFrom;
-    if (animateFrom === 'random') {
-      const dirs = ['top', 'bottom', 'left', 'right'];
-      direction = dirs[Math.floor(Math.random() * dirs.length)] as typeof animateFrom;
-    }
-
-    switch (direction) {
-      case 'top':
-        return { x: item.x, y: -200 };
-      case 'bottom':
-        return { x: item.x, y: window.innerHeight + 200 };
-      case 'left':
-        return { x: -200, y: item.y };
-      case 'right':
-        return { x: window.innerWidth + 200, y: item.y };
-      case 'center':
-        return {
-          x: containerRect.width / 2 - item.w / 2,
-          y: containerRect.height / 2 - item.h / 2
-        };
-      default:
-        return { x: item.x, y: item.y + 100 };
-    }
-  };
-
-  useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
-  }, [items]);
-
-  const grid = useMemo<GridItem[]>(() => {
-    if (!width) return [];
-    const colHeights = new Array(columns).fill(0);
-    const gap = 16;
-    const totalGaps = (columns - 1) * gap;
-    const columnWidth = (width - totalGaps) / columns;
-
-    return items.map(child => {
-      const col = colHeights.indexOf(Math.min(...colHeights));
-      const x = col * (columnWidth + gap);
-      const height = child.height / 2;
-      const y = colHeights[col];
-
-      colHeights[col] += height + gap;
-      return { ...child, x, y, w: columnWidth, h: height };
+  // Partition items dynamically into the calculated column count
+  const columnsData = useMemo(() => {
+    const cols = Array.from({ length: columnsCount }, () => [] as Item[]);
+    items.forEach((item, index) => {
+      cols[index % columnsCount].push(item);
     });
-  }, [columns, items, width]);
-
-  const hasMounted = useRef(false);
-
-  useLayoutEffect(() => {
-    if (!imagesReady) return;
-
-    grid.forEach((item, index) => {
-      const selector = `[data-key="${item.id}"]`;
-      const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
-
-      if (!hasMounted.current) {
-        const start = getInitialPosition(item);
-        gsap.fromTo(
-          selector,
-          {
-            opacity: 0,
-            x: start.x,
-            y: start.y,
-            width: item.w,
-            height: item.h,
-            ...(blurToFocus && { filter: 'blur(10px)' })
-          },
-          {
-            opacity: 1,
-            ...animProps,
-            ...(blurToFocus && { filter: 'blur(0px)' }),
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: index * stagger
-          }
-        );
-      } else {
-        gsap.to(selector, {
-          ...animProps,
-          duration,
-          ease,
-          overwrite: 'auto'
-        });
-      }
-    });
-
-    hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
-
-  const handleMouseEnter = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: hoverScale,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector('.color-overlay') as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0.35, duration: 0.3 });
-    }
-    // Fade in text info overlay if it exists
-    const infoOverlay = element.querySelector('.info-overlay') as HTMLElement;
-    if (infoOverlay) {
-      gsap.to(infoOverlay, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' });
-    }
-  };
-
-  const handleMouseLeave = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: 1,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector('.color-overlay') as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
-    }
-    // Fade out text info overlay if it exists
-    const infoOverlay = element.querySelector('.info-overlay') as HTMLElement;
-    if (infoOverlay) {
-      gsap.to(infoOverlay, { opacity: 0, y: 10, duration: 0.3, ease: 'power2.out' });
-    }
-  };
-
-  // We calculate the maximum height of the columns to set the container height
-  const containerHeight = useMemo(() => {
-    if (!width || grid.length === 0) return 0;
-    const colHeights = new Array(columns).fill(0);
-    grid.forEach(item => {
-      const colIndex = grid.indexOf(item) % columns; // Simple column index tracking matching grid construction
-      // Actually we should reconstruct heights exactly like in the grid useMemo to be precise
-    });
-    // Let's compute using the same logic:
-    const heights = new Array(columns).fill(0);
-    const gap = 16;
-    grid.forEach(item => {
-      const col = heights.indexOf(Math.min(...heights));
-      heights[col] += item.h + gap;
-    });
-    return Math.max(...heights);
-  }, [grid, columns, width]);
+    return cols;
+  }, [items, columnsCount]);
 
   return (
-    <div 
-      ref={containerRef} 
-      className="relative w-full" 
-      style={{ height: containerHeight ? `${containerHeight}px` : '1000px' }}
-    >
-      {grid.map(item => (
-        <div
-          key={item.id}
-          data-key={item.id}
-          className="absolute box-content cursor-pointer overflow-hidden rounded-[10px]"
-          style={{ willChange: 'transform, width, height, opacity' }}
-          onClick={() => window.open(item.url, '_blank', 'noopener')}
-          onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
-          onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
-        >
-          <div
-            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300"
-            style={{ backgroundImage: `url(${item.img})` }}
-          >
-            {/* Dark gradient overlay to ensure text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent rounded-[10px] opacity-60 pointer-events-none" />
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 h-full w-full overflow-hidden marquee-mask select-none">
+      {columnsData.map((colItems, colIndex) => {
+        // Alternate scroll directions for columns (column 0: up, column 1: down, column 2: up)
+        const directionClass = colIndex % 2 === 0 ? 'scroll-up' : 'scroll-down';
+        
+        // Alternate scroll speeds for an organic, unsynchronized parallax look
+        const speedClass = colIndex === 0 ? 'speed-slow' : colIndex === 1 ? 'speed-fast' : '';
 
-            {/* Custom Theme Color overlay shift on hover */}
-            {colorShiftOnHover && (
-              <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-[#c62828]/50 to-pink-500/30 opacity-0 pointer-events-none transition-opacity duration-300" />
-            )}
+        // Duplicate items so the column track loops seamlessly in CSS translateY animation
+        const repeatedItems = [...colItems, ...colItems];
 
-            {/* Text Overlay for Premium Feel */}
-            <div 
-              className="info-overlay absolute bottom-0 left-0 right-0 p-4 flex flex-col justify-end translate-y-[10px] opacity-0 pointer-events-none select-none"
-              style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
-            >
-              {item.subtitle && (
-                <span className="text-[8px] text-[#c62828] font-bold tracking-[0.2em] uppercase mb-0.5">
-                  {item.subtitle}
-                </span>
-              )}
-              {item.title && (
-                <h4 className="text-white text-xs font-extrabold uppercase tracking-widest leading-snug">
-                  {item.title}
-                </h4>
-              )}
+        return (
+          <div key={colIndex} className="marquee-column-wrapper h-full">
+            <div className={`marquee-track ${directionClass} ${speedClass}`}>
+              {repeatedItems.map((item, itemIdx) => (
+                <div
+                  key={`${item.id}-dup-${itemIdx}`}
+                  className="marquee-item"
+                  onClick={() => window.open(item.url, '_blank', 'noopener')}
+                >
+                  <div
+                    className="marquee-item-image bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url(${item.img})`,
+                      height: `${item.height / 2.2}px`, // Adjusted ratio to fit card layout perfectly
+                    }}
+                  >
+                    {/* Dark gradient overlay for visual hierarchy and readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-75 pointer-events-none" />
+
+                    {/* Custom Brand Red/Pink color shift overlay on card hover */}
+                    {colorShiftOnHover && (
+                      <div className="color-overlay absolute inset-0 bg-gradient-to-tr from-[#c62828]/40 to-pink-600/20 opacity-0 pointer-events-none transition-opacity duration-300" />
+                    )}
+
+                    {/* Text Details Overlay */}
+                    <div 
+                      className="marquee-info-overlay absolute bottom-0 left-0 right-0 p-4 flex flex-col justify-end select-none"
+                      style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+                    >
+                      <span className="text-[8px] text-[#c62828] font-bold tracking-[0.25em] uppercase mb-0.5">
+                        Harshtal Moments
+                      </span>
+                      {item.title && (
+                        <h4 className="text-white text-xs font-extrabold uppercase tracking-widest leading-snug">
+                          {item.title}
+                        </h4>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

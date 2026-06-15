@@ -30,11 +30,10 @@ function CoreMemberCard({ name, role, roleJp, club, avatarUrl, isSmall, email }:
   const placeholderImage = getBigInitialsSvgUrl(name);
 
   return (
-    <div className={`relative flex w-full flex-col justify-end overflow-hidden rounded-2xl group border border-white/5 transition-all duration-500 hover:border-[#c62828]/50 hover:shadow-[0_15px_30px_rgba(0,0,0,0.5)] ${
-      isSmall
+    <div className={`relative flex w-full flex-col justify-end overflow-hidden rounded-2xl group border border-white/5 transition-all duration-500 hover:border-[#c62828]/50 hover:shadow-[0_15px_30px_rgba(0,0,0,0.5)] ${isSmall
         ? "h-[22rem] md:h-[25rem] max-w-[260px]"
         : "h-[27rem] md:h-[32rem] max-w-[340px]"
-    }`}>
+      }`}>
       {/* Background Image */}
       <img
         alt={name}
@@ -46,9 +45,8 @@ function CoreMemberCard({ name, role, roleJp, club, avatarUrl, isSmall, email }:
 
       {/* Info Content Overlay */}
       <div className={`z-20 transition-all duration-300 ${isSmall ? "p-3 pt-12" : "p-4 pt-16 md:p-5 md:pt-20 lg:pt-24"}`}>
-        <div className={`rounded-xl bg-[#121413]/75 text-white ring-1 ring-white/10 backdrop-blur-[10px] ring-inset transition-all duration-300 group-hover:ring-[#c62828]/30 group-hover:bg-[#121413]/90 ${
-          isSmall ? "px-3 pt-3.5 pb-4" : "px-4 pt-5 pb-6"
-        }`}>
+        <div className={`rounded-xl bg-[#121413]/75 text-white ring-1 ring-white/10 backdrop-blur-[10px] ring-inset transition-all duration-300 group-hover:ring-[#c62828]/30 group-hover:bg-[#121413]/90 ${isSmall ? "px-3 pt-3.5 pb-4" : "px-4 pt-5 pb-6"
+          }`}>
           <div className="flex items-center justify-between">
             <h3 className={`font-bold tracking-wide font-sans ${isSmall ? "text-base" : "text-xl"}`} style={{ fontFamily: "'Josefin Sans', sans-serif" }}>
               {name}
@@ -201,9 +199,9 @@ export function TeamsPage() {
       members: [
         { name: "Mayank Mishra", role: "Overall Coordinator", roleJp: "", avatarInitials: "MM", avatarUrl: "/Mayank.jpeg", email: "is24bm003@iitdh.ac.in" },
         { name: "Ayush Raj", role: "Events Head", roleJp: " ", avatarInitials: "AR", avatarUrl: "/Ayush.jpeg", email: "is24bm002@iitdh.ac.in" },
-        { name: "Harshit Konda", role: "Operations & Logistics Head", roleJp: " ", avatarInitials: "HK", avatarUrl: "/Harshit.jpeg", email: "" },
-        { name: "Shreyas Bhawalkar", role: "Outreach Head", roleJp: " ", avatarInitials: "SB", avatarUrl: "/Shreyas.jpeg", email: "" },
-        { name: "Tushar Hegde", role: "Finance Head", roleJp: " ", avatarInitials: "TH", avatarUrl: "/Tushar.jpeg", email: "" },
+        { name: "Harshit Konda", role: "Operations & Logistics Head", roleJp: " ", avatarInitials: "HK", avatarUrl: "/Harshit.jpeg", email: "mc24bt025@iitdh.ac.in" },
+        { name: "Shreyas Bhawalkar", role: "Outreach Head", roleJp: " ", avatarInitials: "SB", avatarUrl: "/Shreyas.jpeg", email: "me24bt027@iitdh.ac.in" },
+        { name: "Tushar Hegde", role: "Finance Head", roleJp: " ", avatarInitials: "TH", avatarUrl: "/Tushar.jpeg", email: "ep24bt002@iitdh.ac.in" },
       ]
     }
   ];

@@ -86,7 +86,7 @@ export default function App() {
     if (loaderState !== "completed") return;
 
     let locomotiveScroll: any;
-    
+
     import("locomotive-scroll").then((LocomotiveScrollModule) => {
       const LocomotiveScroll = LocomotiveScrollModule.default;
       locomotiveScroll = new LocomotiveScroll({
@@ -124,12 +124,12 @@ export default function App() {
     if (href.startsWith("/") && !href.startsWith("//")) {
       e.preventDefault();
       const [path, hash] = href.split("#");
-      
+
       window.history.pushState(null, "", href);
-      
+
       const [basePath, search] = path.split("?");
       const searchParams = new URLSearchParams(search);
-      
+
       if (basePath === "/") {
         setPage("home");
         setSelectedClub(null);

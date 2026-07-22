@@ -1,4 +1,4 @@
-/* Vertical Marquee Scrolling Keyframes */
+
 @keyframes marqueeUp {
   0% {
     transform: translateY(0);
@@ -17,7 +17,7 @@
   }
 }
 
-/* Linear-gradient masking for fading edges at the top and bottom of the grid */
+
 .marquee-mask {
   mask-image: linear-gradient(
     to bottom,
@@ -35,7 +35,7 @@
   );
 }
 
-/* Container to hide column overflows */
+
 .marquee-column-wrapper {
   position: relative;
   height: 100%;
@@ -44,11 +44,11 @@
   flex-direction: column;
 }
 
-/* Vertical track containing original and duplicated item blocks */
+
 .marquee-track {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Gap between grid items */
+  gap: 1.5rem; 
   width: 100%;
   will-change: transform;
 }
@@ -61,7 +61,7 @@
   animation: marqueeDown 45s linear infinite;
 }
 
-/* Offset speeds for multi-column parallax/organic scroll feel */
+
 .speed-slow {
   animation-duration: 55s !important;
 }
@@ -70,12 +70,12 @@
   animation-duration: 35s !important;
 }
 
-/* Pause the animation for a specific column when user hovers */
+
 .marquee-column-wrapper:hover .marquee-track {
   animation-play-state: paused;
 }
 
-/* Premium Card container with scale transform and shadow adjustments */
+
 .marquee-item {
   position: relative;
   width: 100%;
@@ -101,12 +101,12 @@
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Subtle image scale expansion inside cards on hover */
+
 .marquee-item:hover .marquee-item-image {
   transform: scale(1.04);
 }
 
-/* Custom Red/Pink brand color shift on hover overlay */
+
 .color-overlay {
   transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -115,7 +115,7 @@
   opacity: 0.3;
 }
 
-/* Hover info overlay animation (smooth fade and slide up) */
+
 .marquee-info-overlay {
   position: absolute;
   bottom: 0;

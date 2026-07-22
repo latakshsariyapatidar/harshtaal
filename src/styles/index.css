@@ -1,13 +1,12 @@
 @import './fonts.css';
 @import './tailwind.css';
-@import './theme.css';
 @import './globals.css';
 
 * {
   cursor: url('https://res.cloudinary.com/db69ffwwa/image/upload/v1780758821/Cursor_tsdolg.svg') 2 2, auto;
 }
 
-/* Allow text input and textareas to have the text cursor so editing is usable */
+
 input[type="text"],
 input[type="email"],
 input[type="search"],
@@ -17,7 +16,7 @@ textarea,
   cursor: text;
 }
 
-/* Allow disabled elements to show not-allowed */
+
 :disabled,
 .disabled,
 [disabled] {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import ImageTrail from "../components/ImageTrail";
 
 const sponsors = {
   platinum: [],
@@ -142,6 +143,17 @@ export function SponsorsPage() {
 
   return (
     <div className="relative min-h-screen bg-[#0e100f] text-stone-200 overflow-x-hidden">
+      <ImageTrail
+        items={[
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+          // ...same remaining Sakura URLs
+        ]}
+        variant={5}
+        size={15}
+      />
       <div className="absolute top-0 left-0 right-0 h-[600px] overflow-hidden pointer-events-none z-0">
         <div
           className="absolute inset-0 bg-cover bg-center transition-all duration-75 ease-out scale-120"

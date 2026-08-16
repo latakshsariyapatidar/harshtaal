@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-
+import ImageTrail from "../components/ImageTrail";
 
 
 
@@ -59,6 +59,7 @@ function TicketCard({ name, description, nameJp, price, features, highlight }) {
 
       
       <div className="relative z-10 p-8 pb-4 flex flex-col justify-start pointer-events-none">
+        
         <div className="flex justify-between items-center mb-6">
           <div>
             <p className="text-white/40 font-semibold text-[9px] tracking-[0.3em]" style={{ fontFamily: "'Josefin Sans', sans-serif" }}>HARSHTAL</p>
@@ -195,6 +196,21 @@ export function TicketsPage() {
 
   return (
     <div className="relative min-h-screen bg-[#0e100f] text-stone-200 overflow-x-hidden">
+      
+      <ImageTrail
+              items={[
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+                "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+              ]}
+              variant={5}
+              size={15}
+      />
       
       <div className="absolute top-0 left-0 right-0 h-[600px] overflow-hidden pointer-events-none z-0">
         <div

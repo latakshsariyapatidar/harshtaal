@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { clubsData } from "../data/eventsData";
-
+import ImageTrail from "../components/ImageTrail";
 
 
 
@@ -120,102 +120,138 @@ export function EventsPage({ selectedClub, onSelectEvent }) {
 
   return (
     <div className="relative min-h-screen bg-[#0e100f] text-stone-200 overflow-x-hidden">
-      
+      <ImageTrail
+        items={[
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_1_afhgla.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758824/Sakura_2_zvr61f.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758825/Sakura_3_aanapp.svg",
+          "https://res.cloudinary.com/db69ffwwa/image/upload/v1780758826/Sakura_4_il7dmw.svg",
+        ]}
+        variant={5}
+        size={15}
+      />
       <div className="absolute top-0 left-0 right-0 h-[600px] overflow-hidden pointer-events-none z-0">
         <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-75 ease-out scale-120"
-        style={{
-          backgroundImage: "url('/EventsBackground.png')",
-          filter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
-          WebkitFilter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
-          opacity: 0.35 - scrollProgress * 0.25
-        }} />
+          className="absolute inset-0 bg-cover bg-center transition-all duration-75 ease-out scale-120"
+          style={{
+            backgroundImage:
+              "url('https://res.cloudinary.com/fnwlsbqw/image/upload/v1786889748/harshtal-events-bg.jpg.png')",
+            filter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
+            WebkitFilter: `grayscale(${scrollProgress * 100}%) contrast(1.15)`,
+            opacity: 0.35 - scrollProgress * 0.25,
+          }}
+        />
 
-        
         <div
-        className="absolute inset-x-0 bottom-0 h-72 pointer-events-none z-10"
-        style={{
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-          maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)"
-        }} />
+          className="absolute inset-x-0 bottom-0 h-72 pointer-events-none z-10"
+          style={{
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to top, black 0%, transparent 100%)",
+          }}
+        />
 
-        
         <div className="absolute inset-0 bg-gradient-to-b from-[#0e100f]/40 via-[#0e100f]/60 to-[#0e100f] z-10" />
-        
+
         <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0e100f] to-transparent z-20 pointer-events-none" />
       </div>
 
-      
       <div className="relative pt-36 pb-12 px-6 z-10 text-center max-w-3xl mx-auto">
         <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}>
-
-          <p className="text-stone-500/80 tracking-[0.4em] uppercase text-[10px] mb-3 font-semibold" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>イベント | events</p>
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <p
+            className="text-stone-500/80 tracking-[0.4em] uppercase text-[10px] mb-3 font-semibold"
+            style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+          >
+            イベント | events
+          </p>
           <h1
-          className="text-white mb-6 leading-tight font-extrabold font-sans uppercase tracking-wide"
-          style={{ fontFamily: "'Josefin Sans', sans-serif", fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}>
-
+            className="text-white mb-6 leading-tight font-extrabold font-sans uppercase tracking-wide"
+            style={{
+              fontFamily: "'Josefin Sans', sans-serif",
+              fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+            }}
+          >
             Cultural Events
           </h1>
-          <p className="text-stone-400 leading-relaxed text-md font-light mb-8" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
-            Explore competitions, workshops, and exhibitions arranged by the official cultural clubs of IIT Dharwad.
+          <p
+            className="text-stone-400 leading-relaxed text-md font-light mb-8"
+            style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+          >
+            Explore competitions, workshops, and exhibitions arranged by the
+            official cultural clubs of IIT Dharwad.
           </p>
         </motion.div>
       </div>
 
-      
       <div className="sticky top-20 z-30 w-full flex justify-center py-4 px-6 bg-[#0e100f]/80 backdrop-blur-md border-y border-white/5">
         <div className="flex gap-4 md:gap-8 overflow-x-auto no-scrollbar max-w-full">
-          {clubsData.map((club) =>
-          <button
-          key={club.id}
-          onClick={(e) => handleQuickScroll(e, club.id)}
-          className="text-stone-400 hover:text-white hover:border-b hover:border-[#c62828] pb-1 transition-colors duration-300 text-[10px] md:text-xs tracking-[0.15em] uppercase font-bold whitespace-nowrap"
-          style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
-
+          {clubsData.map((club) => (
+            <button
+              key={club.id}
+              onClick={(e) => handleQuickScroll(e, club.id)}
+              className="text-stone-400 hover:text-white hover:border-b hover:border-[#c62828] pb-1 transition-colors duration-300 text-[10px] md:text-xs tracking-[0.15em] uppercase font-bold whitespace-nowrap"
+              style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+            >
               {club.name.replace(" Club", "")}
-            </button>)}
-
+            </button>
+          ))}
         </div>
       </div>
 
-      
       <div className="relative z-10 bg-[#0e100f] py-16 px-6 pb-32 border-t border-white/5 shadow-[0_-30px_50px_rgba(14,16,15,0.95)]">
         <div className="max-w-6xl mx-auto">
-          {clubsData.map((club) =>
-          <div key={club.id} id={club.id} className="scroll-mt-36 mb-24">
-              
+          {clubsData.map((club) => (
+            <div key={club.id} id={club.id} className="scroll-mt-36 mb-24">
               <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="mb-10 flex flex-col justify-start border-l-2 border-[#c62828] pl-5">
-
-                <span className="text-[9px] text-stone-600/75 font-medium uppercase tracking-widest mb-1.5" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="mb-10 flex flex-col justify-start border-l-2 border-[#c62828] pl-5"
+              >
+                <span
+                  className="text-[9px] text-stone-600/75 font-medium uppercase tracking-widest mb-1.5"
+                  style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+                >
                   {club.nameJp}
                 </span>
-                <h3 className="text-white text-3xl font-extrabold font-sans tracking-wide uppercase" style={{ fontFamily: "'Josefin Sans', sans-serif" }}>
+                <h3
+                  className="text-white text-3xl font-extrabold font-sans tracking-wide uppercase"
+                  style={{ fontFamily: "'Josefin Sans', sans-serif" }}
+                >
                   {club.name}
                 </h3>
-                <p className="text-stone-400 text-sm font-light mt-2 max-w-2xl leading-relaxed" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>
+                <p
+                  className="text-stone-400 text-sm font-light mt-2 max-w-2xl leading-relaxed"
+                  style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+                >
                   {club.description}
                 </p>
               </motion.div>
 
-              
               <div className="grid md:grid-cols-2 gap-8">
-                {club.events.map((event) =>
-              <EventCard key={event.id} event={event} onSelect={onSelectEvent} />)}
-
+                {club.events.map((event) => (
+                  <EventCard
+                    key={event.id}
+                    event={event}
+                    onSelect={onSelectEvent}
+                  />
+                ))}
               </div>
-            </div>)}
-
+            </div>
+          ))}
         </div>
       </div>
-    </div>);
+    </div>
+  );
 
 }

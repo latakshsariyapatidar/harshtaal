@@ -1,99 +1,57 @@
-# 🌸 Harshtal - Annual Cultural Fest Web Application
+# Harshtal — IIT Dharwad cultural fest website
 
-An anime-themed, interactive, and high-performance web application built for **Harshtal**, the annual cultural fest of IIT Dharwad. Built with **React 19**, **JavaScript (JSX)**, **Vite**, **Tailwind CSS**, **Motion**, **GSAP**, and **Locomotive Scroll**.
+An anime-themed cultural fest website with event information, entry passes, sponsors, organizing teams, and a photo gallery. The GitHub repository is named **harshtaal**; the site's existing display name is **Harshtal**.
 
----
+## Start locally
 
-## 🚀 Quick Start & Setup
-
-Follow these steps to run Harshtal locally on your machine:
-
-### Prerequisites
-
-Ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
-- [npm](https://www.npmjs.com/) (v9.0.0 or higher)
-
-### 1. Clone the Repository
+Use Node.js **22.12 or newer in the Node 22 release line** and npm. The locked Vite version requires Node `^20.19.0 || >=22.12.0`; Node 18 is not supported.
 
 ```bash
-git clone https://github.com/latakshsariyapatidar/harshtal.git
-cd harshtal
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Start Development Server
-
-```bash
+git clone https://github.com/latakshsariyapatidar/harshtaal.git
+cd harshtaal
+npm ci
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser to view the application with live reloading.
-
-### 4. Build for Production
+Open the URL printed by Vite (normally http://localhost:5173). To build:
 
 ```bash
 npm run build
 ```
 
-The optimized production assets will be generated in the `dist/` directory. All chunks are optimized to remain under 200 KB for lightning-fast initial load speeds.
+Build output goes to `dist/`. The current package scripts are `dev` and `build`; there is no test, lint, or preview script yet.
 
----
+## Current implementation
 
-## 📁 Repository Structure
+The site uses JavaScript/JSX, React, Vite, Tailwind CSS, Motion, GSAP, and Lottie. React and React DOM currently resolve to 18.3.1 in the lockfile as peer dependencies; explicitly declaring them is tracked in the contributor backlog.
 
-```
-harshtal/
-├── public/                 # Static public assets (Lottie animations, images, icons)
-├── src/
-│   ├── components/         # Shared UI and visual effect components
-│   │   ├── AnimeTransition.jsx  # Page transition wrapper
-│   │   ├── ClickSpark.jsx       # Canvas click spark effect
-│   │   ├── Counter.jsx          # Animated numbers counter
-│   │   ├── FlowingMenu.jsx      # Interactive marquee menu
-│   │   ├── Footer.jsx           # Global footer
-│   │   ├── ImageTrail.jsx       # Mouse image trail effect
-│   │   ├── Loader.jsx           # Initial morphing logo loader
-│   │   ├── Masonry.jsx          # Responsive image masonry grid
-│   │   ├── Navbar.jsx           # Fixed floating navbar
-│   │   └── SakuraPetals.jsx     # Canvas falling sakura petals effect
-│   ├── pages/              # Top-level application page views
-│   │   ├── EventDetailPage.jsx  # Detailed event view with rules & prizes
-│   │   ├── EventsPage.jsx       # Category & club event browser
-│   │   ├── GalleryPage.jsx      # Fest photo gallery with lightbox grid
-│   │   ├── HomePage.jsx         # Main landing page
-│   │   ├── NotFoundPage.jsx     # 404 page
-│   │   ├── SponsorsPage.jsx     # Sponsor showcase page
-│   │   ├── TeamsPage.jsx        # Organizing committee roster
-│   │   └── TicketsPage.jsx      # Pass registration page
-│   ├── data/               # Static event & club dataset
-│   │   └── eventsData.js
-│   ├── lib/                # Shared utilities & audio engine
-│   │   ├── audioEngine.js
-│   │   └── utils.js
-│   ├── styles/             # CSS & Tailwind styling files
-│   ├── App.jsx             # Root component with dynamic route resolution
-│   └── main.jsx            # Vite DOM entry point
-├── docs/                   # Developer documentation & component specs
-├── CONTRIBUTING.md         # Guidelines & Git workflow for contributors
-├── vite.config.js          # Vite build configuration & chunk splitting
-└── package.json            # Project dependencies & scripts
-```
+Navigation is handled in `src/App.jsx` with browser history and location state. It supports Home, Events, Event Detail, Gallery, Sponsors, Teams, Tickets, and a not-found view. Production hosting must serve the app entry point for routes such as `/events` and `/tickets`; configure this for the actual hosting provider before deployment.
 
----
+Event details are currently placeholders. Pass prices are TBA and Register Pass buttons are not yet connected to registration. Treat this as the current implementation, not a working payment or registration service.
 
-## 📖 Documentation & Contributing
+## Repository map
 
-- **Component Architecture**: Check out [docs/COMPONENTS.md](./docs/COMPONENTS.md) for a detailed component breakdown.
-- **Contribution Guide**: Check out [CONTRIBUTING.md](./CONTRIBUTING.md) for step-by-step Git commands and PR instructions to prevent merge conflicts.
+| Path | Purpose |
+| --- | --- |
+| `src/App.jsx` | Page selection, browser navigation, intro state |
+| `src/pages/` | Page views |
+| `src/components/` | Navigation, footer, loader, gallery layout, visual effects |
+| `src/data/eventsData.js` | Club/event data and event lookup |
+| `src/styles/` | Shared CSS, font imports, Tailwind styles |
+| `public/` | Local images, sponsor logo, Lottie JSON |
+| `vite.config.js` | Plugins, aliases, and build chunk configuration |
 
----
+Remote media is also referenced directly from Cloudinary. The configured 200 KB chunk warning threshold is a warning, not a guaranteed bundle-size limit.
 
-## 📜 License
+## Contributing
 
-This project is open-source under the MIT License.
+Start with [CONTRIBUTING.md](CONTRIBUTING.md), then pick an unassigned [ready issue](https://github.com/latakshsariyapatidar/harshtaal/issues?q=is%3Aissue%20is%3Aopen%20label%3A%22status%3A%20ready%22%20no%3Aassignee).
+
+- [Component guide](docs/COMPONENTS.md)
+- [Labels and maintainer workflow](docs/MAINTAINING.md)
+- [Community conduct](CODE_OF_CONDUCT.md)
+- [Issue tracker](https://github.com/latakshsariyapatidar/harshtaal/issues)
+
+## License and media
+
+The previous README described the project as MIT, but no LICENSE file is currently tracked. The owner must confirm the license before this documentation asserts a grant. Photographs, sponsor marks, and other third-party media may have separate usage restrictions; do not assume the code license covers them.

@@ -246,7 +246,7 @@ export function TicketsPage() {
           <p className="text-stone-500/80 tracking-[0.4em] uppercase text-[10px] mb-3 font-semibold" style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>チケット | passes</p>
           <h1
           className="text-white mb-6 leading-tight font-extrabold font-sans uppercase tracking-wide"
-          style={{ fontFamily: "'Josefin Sans', sans-serif", fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}>
+          style={{ fontFamily:  "'Cormorant Garamond', serif", fontSize: "clamp(2.5rem, 6vw, 4.5rem)",}}>
 
             Entry Passes
           </h1>

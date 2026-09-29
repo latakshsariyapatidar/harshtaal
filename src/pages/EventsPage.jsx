@@ -177,7 +177,7 @@ export function EventsPage({ selectedClub, onSelectEvent }) {
           <h1
             className="text-white mb-6 leading-tight font-extrabold font-sans uppercase tracking-wide"
             style={{
-              fontFamily: "'Josefin Sans', sans-serif",
+              fontFamily: "'Cormorant Garamond', serif",
               fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
             }}
           >
